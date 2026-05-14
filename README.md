@@ -58,7 +58,7 @@ export OPENAI_API_KEY="your_key_here"
 
 Detailed information regarding architecture, contribution standards, and security policies is available in the `docs` directory:
 
-- [Architecture Overview](docs/architecture.md)
+- [Architecture Overview](docs/ARCHITECTURE.md)
 - [Project Guidelines](docs/OPENCLAUDE.md)
 - [Contribution Guide](docs/CONTRIBUTING.md)
 - [Code of Conduct](docs/CODE_OF_CONDUCT.md)
