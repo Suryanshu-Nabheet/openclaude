@@ -1,108 +1,73 @@
 # OpenClaude
 
-**A powerful CLI agent for building software with any LLM.**
+### AI Coding Agent for the Terminal
+**Developed by Suryanshu Nabheet**
 
-OpenClaude is a terminal-first coding agent that works with OpenAI, Gemini, DeepSeek, Ollama, and 200+ models. Build software interactively with AI-powered tools for file editing, code search, bash execution, web search, and multi-agent workflows — all from your terminal.
+---
 
-## Quick Start
+OpenClaude is a professional-grade, CLI agent designed for software engineering tasks. It provides a unified interface to leverage Large Language Models (LLMs) for complex debugging, feature implementation, and architectural refactoring directly within the terminal environment.
 
-### Install
+## Key Capabilities
 
-```bash
-npm install -g openclaude
-```
+- **Autonomous Engineering**: Executes multi-turn engineering workflows to resolve issues with high precision.
+- **Extensive Model Support**: Integrated support for Anthropic Claude, OpenAI GPT, Google Gemini, DeepSeek, and local providers via Ollama.
+- **Professional Toolset**: Includes 45+ built-in tools for file manipulation, shell execution, and system diagnostics.
+- **MCP Compatibility**: Full implementation of the Model Context Protocol (MCP) for extensible tool and resource integration.
+- **Privacy and Security**: Default zero-telemetry architecture ensuring all data remains within the local environment.
+- **High Performance**: Compiled with Bun for minimal execution latency and optimal resource utilization.
 
-### Run
+---
 
-```bash
-openclaude
-```
+## Installation
 
-### OpenAI Setup
+### Prerequisites
+- Bun runtime environment
+- Node.js version 22 or later
 
-```bash
-export CLAUDE_CODE_USE_OPENAI=1
-export OPENAI_API_KEY=sk-your-key-here
-export OPENAI_MODEL=gpt-4o
-openclaude
-```
-
-### Local Ollama Setup
+### Setup Process
 
 ```bash
-export CLAUDE_CODE_USE_OPENAI=1
-export OPENAI_BASE_URL=http://localhost:11434/v1
-export OPENAI_MODEL=qwen2.5-coder:7b
-openclaude
+# Clone the repository
+git clone https://github.com/SuryanshuNabheet/openclaude.git
+cd openclaude
+
+# Initialize the environment
+bun run init
 ```
 
-## Features
+## Execution
 
-- **Multi-Provider Support** — OpenAI, Gemini, DeepSeek, Ollama, Bedrock, Vertex, and any OpenAI-compatible API
-- **Tool-Driven Workflows** — Bash, file read/write/edit, grep, glob, web search/fetch
-- **Multi-Agent System** — Spawn sub-agents for parallel task execution
-- **MCP Support** — Model Context Protocol for extensible tool integrations
-- **Streaming Output** — Real-time token streaming with tool progress
-- **Provider Profiles** — Save and switch between provider configurations with `/provider`
-- **Skills & Plugins** — Extensible skill and plugin system
-- **Task Management** — Create, track, and manage coding tasks
-- **gRPC Server** — Run as a headless service for CI/CD and custom integrations
-
-## Supported Providers
-
-| Provider | Setup |
-|----------|-------|
-| OpenAI-compatible | `/provider` or env vars |
-| Gemini | `/provider` or env vars |
-| Ollama | `/provider` or env vars |
-| DeepSeek | OpenAI-compatible route |
-| GitHub Models | `/onboard-github` |
-| AWS Bedrock | env vars |
-| Google Vertex AI | env vars |
-| LM Studio | OpenAI-compatible route |
-
-## Development
-
-### Source Build
+Configure the preferred API provider and launch the agent:
 
 ```bash
-bun install
-bun run build
-node dist/cli.mjs
+# Using Anthropic Claude
+export ANTHROPIC_API_KEY="your_key_here"
+./bin/openclaude
+
+# Using OpenAI
+export OPENAI_API_KEY="your_key_here"
+./bin/openclaude --provider openai
+
+# Using Local Ollama Models
+./bin/openclaude --provider ollama --model llama3.2
 ```
 
-### Development Commands
+---
 
-```bash
-bun run dev          # Build and run
-bun test             # Run tests
-bun run smoke        # Smoke test
-bun run typecheck    # Type checking
-```
+## Documentation and Governance
 
-## Project Structure
+Detailed information regarding architecture, contribution standards, and security policies is available in the `docs` directory:
 
-```
-src/           Core CLI agent runtime
-├── commands/  Slash commands
-├── tools/     AI tool implementations
-├── services/  Background services
-├── components/  UI components (Ink/React)
-├── integrations/  Provider integrations
-├── utils/     Utilities
-scripts/       Build and maintenance scripts
-bin/           CLI launcher entrypoint
-tests/         Test suite
-```
+- [Architecture Overview](docs/architecture.md)
+- [Project Guidelines](docs/OPENCLAUDE.md)
+- [Contribution Guide](docs/CONTRIBUTING.md)
+- [Code of Conduct](docs/CODE_OF_CONDUCT.md)
+- [Security Policy](docs/SECURITY.md)
 
-## Configuration
-
-Copy `.env.example` to `.env` and configure your provider. See the example file for all supported providers and options.
+---
 
 ## License
 
-[MIT](LICENSE) — Suryanshu Nabheet
+This project is licensed under the MIT License. Refer to the [LICENSE](LICENSE) file for the complete legal text.
 
-## Author
-
-**Suryanshu Nabheet**
+Copyright (c) 2026 Suryanshu Nabheet.
