@@ -39,9 +39,9 @@ for (const pattern of BANNED_PATTERNS) {
 console.log('')
 
 if (exitCode === 0) {
-  console.log('✓ All checks passed — no banned patterns in build output')
+  console.log('[PASS] All checks passed — no banned patterns in build output')
 } else {
-  console.log('✗ FAILED — banned patterns found in build output')
+  console.log('[FAIL] FAILED — banned patterns found in build output')
 }
 
 process.exit(exitCode)

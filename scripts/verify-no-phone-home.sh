@@ -42,9 +42,9 @@ done
 echo ""
 
 if [ "$EXIT" -eq 0 ]; then
-  echo "✓ All checks passed — no banned patterns in build output"
+  echo "[PASS] All checks passed — no banned patterns in build output"
 else
-  echo "✗ FAILED — banned patterns found in build output"
+  echo "[FAIL] FAILED — banned patterns found in build output"
 fi
 
 exit $EXIT

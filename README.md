@@ -26,14 +26,19 @@ OpenClaude is a professional-grade, CLI agent designed for software engineering 
 
 ### Setup Process
 
+The easiest way to set up OpenClaude is using the automated setup script:
+
 ```bash
 # Clone the repository
 git clone https://github.com/SuryanshuNabheet/openclaude.git
 cd openclaude
 
-# Initialize the environment
-bun run init
+# Run the end-to-end setup script
+bun run setup
 ```
+
+This will check prerequisites, install dependencies, set up your `.env` file, and build the project.
+
 
 ## Execution
 

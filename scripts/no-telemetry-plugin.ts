@@ -135,6 +135,6 @@ export const noTelemetryPlugin: BunPlugin = {
 			}))
 		}
 
-		console.log(`  🔇 no-telemetry: stubbed ${Object.keys(stubs).length} modules`)
+		console.log(`  [STUB] no-telemetry: stubbed ${Object.keys(stubs).length} modules`)
 	},
 }

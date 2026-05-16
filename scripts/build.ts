@@ -194,7 +194,7 @@ export async function handleBgFlag() { throw new Error("Background sessions are 
         build.onResolve(
           { filter: /^\.\.\/(daemon\/workerRegistry|daemon\/main|cli\/bg|cli\/handlers\/templateJobs|environment-runner\/main|self-hosted-runner\/main)\.js$/ },
           args => {
-            if (!internalFeatureStubModules.has(args.path)) return null
+            if (!internalFeatureStubModules.has(args.path as any)) return null
             return {
               path: args.path,
               namespace: 'internal-feature-stub',
@@ -205,7 +205,7 @@ export async function handleBgFlag() { throw new Error("Background sessions are 
           { filter: /.*/, namespace: 'internal-feature-stub' },
           args => ({
             contents:
-              internalFeatureStubModules.get(args.path) ??
+              internalFeatureStubModules.get(args.path as any) ??
               'export {}',
             loader: 'js',
           }),
@@ -425,10 +425,10 @@ if (!result.success) {
   }
   process.exitCode = 1
 } else {
-  console.log(`✓ Built openclaude v${version} → dist/cli.mjs`)
+  console.log(`[OK] Built openclaude v${version} → dist/cli.mjs`)
 }
 
-// ── SDK Bundle Build ──────────────────────────────────────────────────────
+// [BUILD] SDK Bundle Build
 // SDK is a separate bundle for npm consumption - must NOT bundle React/Ink
 console.log('Building SDK bundle...')
 
@@ -856,13 +856,13 @@ if (!sdkResult.success) {
   }
   process.exitCode = 1
 } else {
-  console.log(`✓ Built SDK bundle → dist/sdk.mjs`)
+  console.log(`[OK] Built SDK bundle → dist/sdk.mjs`)
 }
 
 } finally {
   // Always restore source files, even if Bun.build() throws
   restoreModifiedFiles()
-  console.log(`  🔄 feature-flags: pre-processed ${numModified} files (restored)`)
+  console.log(`  [RESTORED] feature-flags: pre-processed ${numModified} files`)
 }
 
 // ── Validate SDK bundle for React/Ink leakage ──────────────────────────────
@@ -880,11 +880,11 @@ if (sdkResult?.success) {
     if (match) leaks.push(match[0])
   }
   if (leaks.length > 0) {
-    console.error(`\n❌ SDK bundle contains React/Ink imports (must be stubbed):`)
+    console.error(`\n[ERROR] SDK bundle contains React/Ink imports (must be stubbed):`)
     for (const leak of leaks) console.error(`   - ${leak}`)
     process.exitCode = 1
   } else {
-    console.log(`✓ SDK bundle: no React/Ink leakage detected`)
+    console.log(`[OK] SDK bundle: no React/Ink leakage detected`)
   }
 }
 

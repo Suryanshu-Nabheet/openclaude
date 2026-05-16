@@ -80,7 +80,7 @@ export function FastModePicker(t0) {
       if (enableFastMode) {
         const fastIcon = getFastIconString(enableFastMode);
         const modelUpdated = !isFastModeSupportedByModel(model) ? ` · model set to ${FAST_MODE_MODEL_DISPLAY}` : "";
-        onDone(`${fastIcon} Fast mode ON${modelUpdated} · ${pricing}`);
+        onDone(`Fast mode ON${modelUpdated} | ${pricing}`);
       } else {
         setAppState(_temp3);
         onDone("Fast mode OFF");
@@ -240,7 +240,7 @@ async function handleFastModeShortcut(enable: boolean, getAppState: () => AppSta
     const fastIcon = getFastIconString(true);
     const modelUpdated = !isFastModeSupportedByModel(mainLoopModel) ? ` · model set to ${FAST_MODE_MODEL_DISPLAY}` : '';
     const pricing = formatModelPricing(getOpus46CostTier(true));
-    return `${fastIcon} Fast mode ON${modelUpdated} · ${pricing}`;
+    return `Fast mode ON${modelUpdated} | ${pricing}`;
   } else {
     return `Fast mode OFF`;
   }

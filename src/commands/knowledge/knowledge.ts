@@ -39,7 +39,7 @@ export const call: LocalCommandCall = async (args, _context) => {
     saveGlobalConfig(current => ({ ...current, knowledgeGraphEnabled: isEnabled }));
     return { 
       type: 'text', 
-      value: `✨ Knowledge Graph engine ${isEnabled ? chalk.green('enabled') : chalk.red('disabled')}.` 
+      value: `Knowledge Graph engine ${isEnabled ? chalk.green('enabled') : chalk.red('disabled')}.` 
     };
   }
 
@@ -48,7 +48,7 @@ export const call: LocalCommandCall = async (args, _context) => {
     resetGlobalGraph();
     return { 
       type: 'text', 
-      value: '🗑️ Knowledge graph memory has been cleared for this session.' 
+      value: 'Knowledge graph memory has been cleared for this session.' 
     };
   }
 

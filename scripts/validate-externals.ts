@@ -22,7 +22,7 @@ function validate(bundleName: string, externals: string[]): boolean {
   )
 
   if (missing.length > 0) {
-    console.error(`❌ ${bundleName}: Dependencies missing from externals:`)
+    console.error(`[FAIL] ${bundleName}: Dependencies missing from externals:`)
     for (const dep of missing) {
       console.error(`   - ${dep}`)
     }
@@ -35,13 +35,13 @@ function validate(bundleName: string, externals: string[]): boolean {
   const optionalSet = new Set(OPTIONAL_RUNTIME_EXTERNALS)
   const extra = [...externalSet].filter(d => !allDeps.has(d) && !optionalSet.has(d))
   if (extra.length > 0) {
-    console.warn(`⚠️  ${bundleName}: External entries not in package.json (may be ok):`)
+    console.warn(`[WARN] ${bundleName}: External entries not in package.json (may be ok):`)
     for (const dep of extra) {
       console.warn(`   - ${dep}`)
     }
   }
 
-  console.log(`✓ ${bundleName}: All dependencies accounted for (${missing.length} missing, ${externalSet.size} external)`)
+  console.log(`[OK] ${bundleName}: All dependencies accounted for (${missing.length} missing, ${externalSet.size} external)`)
   return true
 }
 
@@ -49,11 +49,11 @@ const cliOk = validate('CLI bundle', CLI_EXTERNALS)
 const sdkOk = validate('SDK bundle', SDK_EXTERNALS)
 
 if (!cliOk || !sdkOk) {
-  console.error(`\n❌ External list validation failed. Fix scripts/externals.ts before committing.`)
+  console.error(`\n[FAIL] External list validation failed. Fix scripts/externals.ts before committing.`)
   process.exit(1)
 }
 
-console.log('\n✓ All external lists valid.')
+console.log('\n[OK] All external lists valid.')
 
 // ============================================================================
 // Validate sdk.d.ts ↔ index.ts export drift
@@ -87,7 +87,7 @@ const inDtsNotIndex = [...dtsExports].filter(n => !indexExports.has(n))
 const inIndexNotDts = [...indexExports].filter(n => !dtsExports.has(n))
 
 if (inDtsNotIndex.length > 0 || inIndexNotDts.length > 0) {
-  console.error(`\n❌ SDK type declaration drift detected:`)
+  console.error(`\n[FAIL] SDK type declaration drift detected:`)
   if (inDtsNotIndex.length > 0) {
     console.error(`   In sdk.d.ts but not in index.ts:`)
     for (const name of inDtsNotIndex) console.error(`     - ${name}`)
@@ -100,4 +100,4 @@ if (inDtsNotIndex.length > 0 || inIndexNotDts.length > 0) {
   process.exit(1)
 }
 
-console.log(`✓ SDK type declarations in sync (${dtsExports.size} exports match).`)
+console.log(`[OK] SDK type declarations in sync (${dtsExports.size} exports match).`)
